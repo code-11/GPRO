@@ -10,6 +10,7 @@
 #
 
 import sys
+from graphics import *
 
 WIN_SEQUENCES = [
     [0,1,2,3],
@@ -90,6 +91,33 @@ def utility (board):
 
 def possible_moves (board):
     return [i for (i,e) in enumerate(board) if e == '.']
+
+def draw_board(win, brd):
+    size = 200
+    blank = Rectangle(Point(0,0), Point(size+10,size+10))
+    blank.setFill("white")
+    blank.draw(win)
+
+    line1 = Line(Point(0,size/4),Point(size,size/4))
+    line2 = Line(Point(0,size/4*2),Point(size,size/4*2))
+    line3 = Line(Point(0,size/4*3),Point(size,size/4*3))
+    line1.draw(win)
+    line2.draw(win)
+    line3.draw(win)
+    line4 = Line(Point(size/4,0),Point(size/4,size))
+    line5 = Line(Point(size/4*2,0),Point(size/4*2,size))
+    line6 = Line(Point(size/4*3,0),Point(size/4*3,size))
+    line4.draw(win)
+    line5.draw(win)
+    line6.draw(win)
+
+    for i in xrange(16):
+        # print brd[i]
+        xPos = (i%4+1)*50-25
+        yPos = (i/4+1)*50-25
+        text = Text(Point(xPos,yPos),brd[i])
+        text.draw(win)
+
 
 def print_board (board):
     # FIX ME
@@ -177,6 +205,9 @@ def other (player):
 def run (input_str,player,playX,playO): 
 
     board = create_board(input_str)
+
+    win = GraphWin("Rush Board", 200, 200)
+    draw_board(win, board)
 
     print_board(board)
 
