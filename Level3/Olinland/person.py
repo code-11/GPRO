@@ -91,7 +91,7 @@ class Person (MobileThing):    # Container...
 
     def die (self):
         self.location().broadcast('An earth-shattering, soul-piercing scream is heard...')
-        self.location().braodcast("The unfortunate soul's body and possesions are instantly eaten by a grue")
+        self.location().broadcast("The unfortunate soul's body and possesions are instantly eaten by a grue")
         self.destroy()
         
 

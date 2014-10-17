@@ -51,12 +51,12 @@ def create_world ():
     biconnect(mh353, 'east',  mh3rd)
     biconnect(mh3rd, 'down',  mh2nd)
     biconnect(mh2nd, 'down',  mh1st)
-    biconnect(mh1st, 'north',  oval)
-    biconnect(oval, 'east',  cc1st)
+    #biconnect(mh1st, 'north',  oval)
+    #biconnect(oval, 'east',  cc1st)
     biconnect(cc1st, 'east',  westh)
     biconnect(westh, 'east',  easth)
-    biconnect(oval, 'north',  babson)
-    biconnect(oval, 'west',  ac1st)
+    #biconnect(oval, 'north',  babson)
+    #biconnect(oval, 'west',  ac1st)
     biconnect(ac1st, 'north',  ac113)
 
     # The player is the first 'thing' that has to be created
@@ -65,14 +65,18 @@ def create_world ():
 
     Radar('handy radar',oval,"Its an N-dimensional object locator. Hard to look at it for long periods.") 
     Thing('blackboard', ac113,"Dustier than a white board")
-    Thing('lovely-trees', oval,"There are no trees; they are not real")
+    #Thing('lovely-trees', oval,"There are no trees; they are not real")
     MobileThing('cs-book', oval,"Looks thick, I wonder if there's a cheap PDF version")
     MobileThing('math-book', oval,"It doesn't have the answers in the back. It is useless to me.")
 
-    Computer('hal-9000', oval)
+    temp_npc=NPC('ebenezer',oval,5,1)
+    Player.clock.register(temp_npc.move_and_take_stuff,8)
+
+    Computer('hal-9000', mh2nd)
     Computer('johnny-5', easth)
 
-    Professor('Riccardo',mh353,random.randint(1,5),2)
+    temp_prof=Professor('Riccardo',mh353,random.randint(1,5),2)
+    Player.clock.register(temp_prof.lecture,8)
     
     homeworks = ['hw-1', 
                  'hw-2',
@@ -90,20 +94,22 @@ def create_world ():
                 'Sophie Sophomore',
                 'Cedric Senior']
 
-    for student in students:
-        NPC(student,
-            random.choice(Room.rooms),
-            random.randint(1,5),
-            random.randint(1,5))
+##    for student in students:
+##        temp_npc=NPC(student,
+##            random.choice(Room.rooms),
+##            random.randint(1,5),
+##            random.randint(1,5))
+##        Player.clock.register(temp_npc.move_and_take_stuff,8)
 
     trolls = ['Polyphemus',
               'Gollum']
 
     for troll in trolls:
-      Troll(troll,
+      tempTroll=Troll(troll,
             random.choice(Room.rooms),
             random.randint(1,3),
             random.randint(1,3))
+      Player.clock.register(tempTroll.eat_people,9)
 
 
 VERBS = {
@@ -147,13 +153,15 @@ def main ():
     create_world()
     
     Player.me.look_around()
-
+    Player.clock.register(print_tick_action,10)
     while True:
         response = read_player_input ()
         print
         if response[0] in VERBS:
             result = VERBS[response[0]].act(response[1:])
             if result == NEXT_ROUND:
+                
+                Player.clock.tick()
                 Player.me.look_around()
         else:
             print 'What??'

@@ -10,6 +10,7 @@ class NPC (Person):
         self._miserly = miserly
         
     def move_and_take_stuff (self,time):
+        print self.name()+"thinking about moving and taking"
         if not self.is_in_limbo():
             if random.randrange(self._restlessness) == 0:
                 self.move_somewhere()
@@ -28,7 +29,9 @@ class NPC (Person):
         everything.extend(self.peek_around())
         if everything:
             something = random.choice(everything)
+            print self.name()+" takes "+something.name()+" from "+something.location().name()
             something.take(self)
+        print self.name()+" has "+str(len(everything))+" items to take from"
 
     def die (self):
         self.say('SHREEEEEK! I, uh, suddenly feel very faint...')
