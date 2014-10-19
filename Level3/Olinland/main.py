@@ -10,7 +10,8 @@ from troll import *
 from professor import *
 from homework import *
 from computer import *
-
+from trollhunter import *
+from badninja import *
 
 REVERSE = {
     'north' : 'south',
@@ -72,11 +73,30 @@ def create_world ():
     temp_npc=NPC('ebenezer',oval,5,1)
     Player.clock.register(temp_npc.move_and_take_stuff,8)
 
+    #temp_th=TrollHunter("Jack 'o Blades",oval,1)
+    #Player.clock.register(temp_th.search_and_destroy,9)
+    
     Computer('hal-9000', mh2nd)
     Computer('johnny-5', easth)
 
     temp_prof=Professor('Riccardo',mh353,random.randint(1,5),2)
     Player.clock.register(temp_prof.lecture,8)
+
+
+    badninjas=["Fuma Kotaro"]
+               #"Hittori Hanzo",
+    for ninja in badninjas:
+        temp_ninja=BadNinja(ninja,oval,1)
+        Player.clock.register(temp_ninja.find_and_steal,5)
+
+    trollhunters=["Jack 'o Blades",
+                  "Conan",
+                  "Beowolf",
+                  "Sivard Snarensven"]
+    
+    for hunter in trollhunters:
+        temp_th=TrollHunter(hunter,random.choice(Room.rooms),1)
+        Player.clock.register(temp_th.search_and_destroy,9)
     
     homeworks = ['hw-1', 
                  'hw-2',
@@ -88,6 +108,9 @@ def create_world ():
     for homework in homeworks:
         Homework(homework,
                  random.choice(Room.rooms))
+
+    test=Homework('hw-7',oval)
+    test.complete()
 
     students = ['Frankie Freshman',
                 'Joe Junior',

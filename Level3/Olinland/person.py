@@ -49,7 +49,7 @@ class Person (MobileThing):    # Container...
 
     def stuff_around (self):
         return [x for x in self.location().contents() if not x.is_person()]
-
+    
 
     # this function should return everything that everyone in the
     # same location as this person are holding/carrying
