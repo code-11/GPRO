@@ -12,6 +12,7 @@ from homework import *
 from computer import *
 from trollhunter import *
 from badninja import *
+from butterfly import *
 
 REVERSE = {
     'north' : 'south',
@@ -81,6 +82,9 @@ def create_world ():
 
     temp_prof=Professor('Riccardo',mh353,random.randint(1,5),2)
     Player.clock.register(temp_prof.lecture,8)
+
+    flutterby=ButterFly('Cloudless Sulphur',oval)
+    Player.clock.register(flutterby.grow_and_conquer,2)
 
 
     badninjas=["Fuma Kotaro"]
