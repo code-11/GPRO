@@ -13,6 +13,8 @@ from computer import *
 from trollhunter import *
 from badninja import *
 from butterfly import *
+from needy import *
+from hermit import *
 
 REVERSE = {
     'north' : 'south',
@@ -50,6 +52,9 @@ def create_world ():
     easth = Room('East Hall')
     babson = Room('Babson College')
 
+    test =Room('The Void')
+    biconnect(oval, 'up',test)
+
     biconnect(mh353, 'east',  mh3rd)
     biconnect(mh3rd, 'down',  mh2nd)
     biconnect(mh2nd, 'down',  mh1st)
@@ -71,8 +76,8 @@ def create_world ():
     MobileThing('cs-book', oval,"Looks thick, I wonder if there's a cheap PDF version")
     MobileThing('math-book', oval,"It doesn't have the answers in the back. It is useless to me.")
 
-    temp_npc=NPC('ebenezer',oval,5,1)
-    Player.clock.register(temp_npc.move_and_take_stuff,8)
+##    temp_npc=NPC('ebenezer',oval,5,1)
+##    Player.clock.register(temp_npc.move_and_take_stuff,8)
 
     #temp_th=TrollHunter("Jack 'o Blades",oval,1)
     #Player.clock.register(temp_th.search_and_destroy,9)
@@ -83,35 +88,39 @@ def create_world ():
     temp_prof=Professor('Riccardo',mh353,random.randint(1,5),2)
     Player.clock.register(temp_prof.lecture,8)
 
-    flutterby=ButterFly('Cloudless Sulphur',oval)
-    Player.clock.register(flutterby.grow_and_conquer,2)
+    #Needy('Archibald',oval,'done-hw-7','Mild mannered explorer')
 
+    Hermit('Plato',oval,'This grumpy man wears nothing but a toga...ick')
 
-    badninjas=["Fuma Kotaro"]
-               #"Hittori Hanzo",
-    for ninja in badninjas:
-        temp_ninja=BadNinja(ninja,oval,1)
-        Player.clock.register(temp_ninja.find_and_steal,5)
-
-    trollhunters=["Jack 'o Blades",
-                  "Conan",
-                  "Beowolf",
-                  "Sivard Snarensven"]
-    
-    for hunter in trollhunters:
-        temp_th=TrollHunter(hunter,random.choice(Room.rooms),1)
-        Player.clock.register(temp_th.search_and_destroy,9)
-    
-    homeworks = ['hw-1', 
-                 'hw-2',
-                 'hw-3',
-                 'hw-4',
-                 'hw-5',
-                 'hw-6']
-    
-    for homework in homeworks:
-        Homework(homework,
-                 random.choice(Room.rooms))
+##    flutterby=ButterFly('Cloudless Sulphur',oval)
+##    Player.clock.register(flutterby.grow_and_conquer,2)
+##
+##
+##    badninjas=["Fuma Kotaro"]
+##               #"Hittori Hanzo",
+##    for ninja in badninjas:
+##        temp_ninja=BadNinja(ninja,oval,1)
+##        Player.clock.register(temp_ninja.find_and_steal,5)
+##
+##    trollhunters=["Jack 'o Blades",
+##                  "Conan",
+##                  "Beowolf",
+##                  "Sivard Snarensven"]
+##    
+##    for hunter in trollhunters:
+##        temp_th=TrollHunter(hunter,random.choice(Room.rooms),1)
+##        Player.clock.register(temp_th.search_and_destroy,9)
+##    
+##    homeworks = ['hw-1', 
+##                 'hw-2',
+##                 'hw-3',
+##                 'hw-4',
+##                 'hw-5',
+##                 'hw-6']
+##    
+##    for homework in homeworks:
+##        Homework(homework,
+##                 random.choice(Room.rooms))
 
     test=Homework('hw-7',oval)
     test.complete()
@@ -128,15 +137,15 @@ def create_world ():
 ##            random.randint(1,5))
 ##        Player.clock.register(temp_npc.move_and_take_stuff,8)
 
-    trolls = ['Polyphemus',
-              'Gollum']
-
-    for troll in trolls:
-      tempTroll=Troll(troll,
-            random.choice(Room.rooms),
-            random.randint(1,3),
-            random.randint(1,3))
-      Player.clock.register(tempTroll.eat_people,9)
+##    trolls = ['Polyphemus',
+##              'Gollum']
+##
+##    for troll in trolls:
+##      tempTroll=Troll(troll,
+##            random.choice(Room.rooms),
+##            random.randint(1,3),
+##            random.randint(1,3))
+##      Player.clock.register(tempTroll.eat_people,9)
 
 
 VERBS = {
