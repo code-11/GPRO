@@ -1,4 +1,8 @@
 from goalseeker import *
+#A Hermit is an NPC that desires to be alone.
+#If it can be alone for 5 turns, it will achieve enlightenment
+#If someone disrupts him though, he will get annoyed and leave
+
 class Hermit(GoalSeeking):
 
     def __init__(self,name,loc,desc="This hermit has no description"):

@@ -1,5 +1,8 @@
 from goalseeker import *
 
+# A needy goalseeker wants to obtain a specific item by legal means.
+# It will move around randomly until it finds its item.
+
 class Needy(GoalSeeking):
 
     def __init__(self,name,loc,item,desc="This needer has no description"):
