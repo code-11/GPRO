@@ -1,0 +1,26 @@
+Python 2.7.5 (default, May 15 2013, 22:43:36) [MSC v.1500 32 bit (Intel)] on win32
+Type "copyright", "credits" or "license()" for more information.
+>>> ================================ RESTART ================================
+>>> 
+Olinland, version 1.4 (Fall 2014)
+
+------------------------------------------------------------
+You are in Oval
+The Oval, smack in the center of Olin College.
+You aren't carrying anything
+You see: handy-radar, cs-book, math-book, done-hw-7
+You see: Archibald
+Exits: up
+
+What is thy bidding? look Archibald
+
+Blubbering-Fool says -- Mild mannered explorer
+
+What is thy bidding? take done-hw-7
+
+Blubbering-Fool says -- I take the done-hw-7 from Oval
+
+What is thy bidding? give done-hw-7 Archibald
+
+Blubbering-Fool says -- I reluctantly give the done-hw-7 to Archibald
+Archibald says -- oh boy! I found done-hw-7! Thats just what I was looking for!

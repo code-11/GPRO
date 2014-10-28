@@ -1,0 +1,96 @@
+Python 2.7.5 (default, May 15 2013, 22:43:36) [MSC v.1500 32 bit (Intel)] on win32
+Type "copyright", "credits" or "license()" for more information.
+>>> ================================ RESTART ================================
+>>> 
+Olinland, version 1.4 (Fall 2014)
+
+------------------------------------------------------------
+You are in Oval
+The Oval, smack in the center of Olin College.
+You aren't carrying anything
+You see: handy-radar, cs-book, math-book, done-hw-7
+You see: Plato
+Exits: up
+
+What is thy bidding? wait
+
+Plato says -- haruumph, why won't people leave me alone?
+Plato moves from Oval to The-Void
+The clock ticks 0
+------------------------------------------------------------
+You are in Oval
+The Oval, smack in the center of Olin College.
+You aren't carrying anything
+You see: handy-radar, cs-book, math-book, done-hw-7
+You see no one around
+Exits: up
+
+What is thy bidding? wait
+
+The clock ticks 1
+------------------------------------------------------------
+You are in Oval
+The Oval, smack in the center of Olin College.
+You aren't carrying anything
+You see: handy-radar, cs-book, math-book, done-hw-7
+You see no one around
+Exits: up
+
+What is thy bidding? wait
+
+The clock ticks 2
+------------------------------------------------------------
+You are in Oval
+The Oval, smack in the center of Olin College.
+You aren't carrying anything
+You see: handy-radar, cs-book, math-book, done-hw-7
+You see no one around
+Exits: up
+
+What is thy bidding? wait
+
+The clock ticks 3
+------------------------------------------------------------
+You are in Oval
+The Oval, smack in the center of Olin College.
+You aren't carrying anything
+You see: handy-radar, cs-book, math-book, done-hw-7
+You see no one around
+Exits: up
+
+What is thy bidding? wait
+
+The clock ticks 4
+------------------------------------------------------------
+You are in Oval
+The Oval, smack in the center of Olin College.
+You aren't carrying anything
+You see: handy-radar, cs-book, math-book, done-hw-7
+You see no one around
+Exits: up
+
+What is thy bidding? wait
+
+The clock ticks 5
+------------------------------------------------------------
+You are in Oval
+The Oval, smack in the center of Olin College.
+You aren't carrying anything
+You see: handy-radar, cs-book, math-book, done-hw-7
+You see no one around
+Exits: up
+
+What is thy bidding? up
+
+Blubbering-Fool moves from Oval to The-Void
+Blubbering-Fool says -- Hi Plato-the-enlightened
+The clock ticks 6
+------------------------------------------------------------
+You are in The-Void
+This room has no description
+You aren't carrying anything
+The room is empty
+You see: Plato-the-enlightened
+Exits: down
+
+What is thy bidding? 

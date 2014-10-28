@@ -29,7 +29,7 @@ class Needy(GoalSeeking):
         return self.it() in self._inventory
 
     def goal_move(self,time):
-        print "Inventory:"+str(self._inventory)
+##        print "Inventory:"+str(self._inventory)
         item=self.item_around()
         if item:
             item.take(self)
