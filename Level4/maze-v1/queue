@@ -1,0 +1,4 @@
+import Queue
+class Event_Queue(object):
+    def __init__(self):
+        self.Q=Queue.PriorityQueue

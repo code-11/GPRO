@@ -10,32 +10,9 @@ from character import *
 from player import *
 from baddie import *
 from level import *
+from event_queue import *
+import time
 
-def lost (window):
-    t = Text(Point(WINDOW_WIDTH/2+10,WINDOW_HEIGHT/2+10),'YOU LOST!')
-    t.setSize(36)
-    t.setTextColor('red')
-    t.draw(window)
-    window.getKey()
-    exit(0)
-
-def won (window):
-    t = Text(Point(WINDOW_WIDTH/2+10,WINDOW_HEIGHT/2+10),'YOU WON!')
-    t.setSize(36)
-    t.setTextColor('red')
-    t.draw(window)
-    window.getKey()
-    exit(0)
-
-
-
-
-MOVE = {
-    'Left': (-1,0),
-    'Right': (1,0),
-    'Up' : (0,-1),
-    'Down' : (0,1)
-}
 
 
 def main ():
@@ -55,21 +32,26 @@ def main ():
 
     screen = level.create_screen(window)
 
-    p = Player(10,18,window,level)
+    Q=Event_Queue()
+    
+    p = Player(17,18,window,level,Q)
 
-    baddie1 = Baddie(5,1,window,level,p)
-    baddie2 = Baddie(10,1,window,level,p)
-    baddie3 = Baddie(15,1,window,level,p)
+    baddie1 = Baddie(19,2,window,level,p,Q)
+    baddie2 = Baddie(19,7,window,level,p,Q)
+    baddie3 = Baddie(24,18,window,level,p,Q)
 
+
+
+    
     while not p.at_exit():
-        key = window.checkKey()
-        if key == 'q':
-            window.close()
-            exit(0)
-        if key in MOVE:
-            (dx,dy) = MOVE[key]
-            p.move(dx,dy)
-
+        Q.dequeue_if_ready()
+        #p.movement()
+        #baddie2.movement()
+        if level.has_won():
+            level.when_won(p,window)
+        time.sleep(TIME_STEP)
+        
+            #print rev_index(430)
         # baddies should probably move here
 
     won(window)
