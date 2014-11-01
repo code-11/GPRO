@@ -6,7 +6,7 @@ class Baddie (Character):
     BADDIE_DELAY=TIME_STEP*5
     
     def __init__ (self,x,y,window,level,player,Q):
-        Character.__init__(self,'red.gif',x,y,window,level)
+        Character.__init__(self,'red.gif',x,y,window,level,Q)
         self._player = player
         Q.enqueue(Baddie.BADDIE_DELAY,self)
 
@@ -40,9 +40,16 @@ class Baddie (Character):
         self.movement()
         queue.enqueue(Baddie.BADDIE_DELAY,self)
 
+    def dead_event(self,queue):
+        pass
+
     def check_player(self):
         if self._x==self._player._x and self._y==self._player._y:
             lost(self._window)
+
+    def die(self):
+        #I think this works
+        self.event=self.dead_event 
         
     def movement(self):
         self.check_player()

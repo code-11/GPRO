@@ -2,12 +2,15 @@ from utils import *
 from character import *
 class Player (Character):
     def __init__ (self,x,y,window,level,Q):
-        Character.__init__(self,'android.gif',x,y,window,level)
+        Character.__init__(self,'android.gif',x,y,window,level,Q)
         Q.enqueue(TIME_STEP,self)
         
     def event(self,queue):
         self.movement()
         queue.enqueue(TIME_STEP,self)
+
+    def die(self):
+        lost(self._window)
 
     def movement(self):
         key = self._window.checkKey()

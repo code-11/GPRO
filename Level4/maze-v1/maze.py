@@ -40,19 +40,14 @@ def main ():
     baddie2 = Baddie(19,7,window,level,p,Q)
     baddie3 = Baddie(24,18,window,level,p,Q)
 
-
+    level.characters.extend([p,baddie1,baddie2,baddie3])
 
     
     while not p.at_exit():
         Q.dequeue_if_ready()
-        #p.movement()
-        #baddie2.movement()
         if level.has_won():
             level.when_won(p,window)
         time.sleep(TIME_STEP)
-        
-            #print rev_index(430)
-        # baddies should probably move here
 
     won(window)
 

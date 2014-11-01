@@ -11,6 +11,7 @@ class Level(object):
         self.climable={2,3}
         self.fallable={0,4}
         self.is_won=False
+        self.characters=[]
 
     def create_demo (self):
         screen = []
@@ -134,7 +135,10 @@ class Level(object):
         #print "collecting gold in level"
 
     def is_permeable(self,x,y):
-        return self.board[index(x,y)] in self.permeable
+        try:
+            return self.board[index(x,y)] in self.permeable
+        except:
+            return False
     def is_fallable(self,x,y):
         return self.board[index(x,y)] in self.fallable
     def is_empty(self,x,y):
