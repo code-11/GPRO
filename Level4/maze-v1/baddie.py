@@ -49,6 +49,9 @@ class Baddie (Character):
 
     def die(self):
         #I think this works
+        #print "crunch"
+        self._dead=True
+        self._img.undraw()
         self.event=self.dead_event 
         
     def movement(self):

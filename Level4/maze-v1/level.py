@@ -1,17 +1,17 @@
-
-
+from water import *
 from utils import *
 class Level(object):
 
 
-    def __init__(self):
+    def __init__(self,window):
         self.board=self.create_level()
         self.pics_ref={}
-        self.permeable={0,2,3,4}
+        self.permeable={0,2,3,4,5}
         self.climable={2,3}
-        self.fallable={0,4}
+        self.fallable={0,4,5}
         self.is_won=False
         self.characters=[]
+        self._window=window
 
     def create_demo (self):
         screen = []
@@ -41,6 +41,7 @@ class Level(object):
 # 2 ladder
 # 3 rope
 # 4 gold
+# 5 water
 
     def create_level(self):
         screen = []
@@ -65,6 +66,37 @@ class Level(object):
         screen.extend([1,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,2,0,0,0,0,0,0,0,1])
         screen.extend([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
         return screen
+
+    def create_second_level(self):
+        screen = []
+        screen.extend([1,0,0,0,0,1,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0])
+        screen.extend([2,0,4,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
+        screen.extend([2,1,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0])
+        screen.extend([2,0,0,0,4,4,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2])
+        screen.extend([2,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,2])
+        screen.extend([2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2])
+        screen.extend([2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,3,3,3,2])
+        screen.extend([2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2])
+        screen.extend([2,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,0,1,1,0,0,0,0,0,0,1,1,1,1,0,2])
+        screen.extend([3,3,3,3,3,2,0,0,0,0,0,0,0,0,0,0,3,3,3,3,2,1,0,0,0,0,0,0,0,1,4,4,1,0,2])
+        screen.extend([0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,2])
+        screen.extend([0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2])
+        screen.extend([0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2])
+        screen.extend([0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2,3,3,3,3,3,3,3,3,3,3,0,2])
+        screen.extend([3,3,3,3,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,2])
+        screen.extend([4,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,2])
+        screen.extend([1,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,2])
+        screen.extend([1,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,1,2,0,0,0,0,1,2,0,0,2])
+        screen.extend([1,5,0,0,0,2,1,1,2,0,0,0,0,0,2,1,0,0,0,0,0,0,2,0,1,2,5,0,0,0,1,2,4,4,2])
+        screen.extend([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
+        return screen
+
+    def handle_water(self,window,queue):
+        for (index,typ) in enumerate(self.board):
+            if typ ==5:
+                coords=rev_index(index)
+                Water(coords[0],coords[1],window,self,queue)
+                
     
     def create_screen (self,window):
         # use this instead of Rectangle below for nicer screen
@@ -72,7 +104,8 @@ class Level(object):
         ladder= 'ladder.gif'
         rope= 'rope.gif'
         gold= 'gold.gif'
-        pics=['buffer',brick,ladder,rope,gold]
+        water='water.gif'
+        pics=['buffer',brick,ladder,rope,gold,water]
         def image (sx,sy,what):
             return Image(Point(sx+CELL_SIZE/2,sy+CELL_SIZE/2),what)
 
@@ -94,7 +127,8 @@ class Level(object):
         ladder= 'ladder.gif'
         rope= 'rope.gif'
         gold= 'gold.gif'
-        pics=['buffer',brick,ladder,rope,gold]
+        water='water.gif'
+        pics=['buffer',brick,ladder,rope,gold,water]
         
         def image (sx,sy,what):
             return Image(Point(sx+CELL_SIZE/2,sy+CELL_SIZE/2),what)
@@ -135,14 +169,27 @@ class Level(object):
         #print "collecting gold in level"
 
     def is_permeable(self,x,y):
+        #cheat so you don't crash by accessing outside of the board
         try:
             return self.board[index(x,y)] in self.permeable
         except:
             return False
+    def redraw_movers(self,window):
+        for char in self.characters:
+            if char._dead==False:
+                char._img.undraw()
+                char._img.draw(window)
+
+    def event(self,queue):
+        self.redraw_movers(self._window)
+        queue.enqueue(TIME_STEP*120,self)
+        
     def is_fallable(self,x,y):
         return self.board[index(x,y)] in self.fallable
     def is_empty(self,x,y):
         return self.board[index(x,y)] ==0
+    def is_water(self,x,y):
+        return self.board[index(x,y)] ==5
     def is_ladder(self,x,y):
         return self.board[index(x,y)] ==2
     def is_gold(self,x,y):

@@ -7,7 +7,13 @@ class Player (Character):
         
     def event(self,queue):
         self.movement()
-        queue.enqueue(TIME_STEP,self)
+        queue.enqueue(self.slow_if_in_water(),self)
+
+    def slow_if_in_water(self):
+        if self._level.is_water(self._x,self._y):
+            return TIME_STEP*2
+        else:
+            return TIME_STEP
 
     def die(self):
         lost(self._window)
@@ -17,15 +23,19 @@ class Player (Character):
         if key == 'q':
             window.close()
             exit(0)
-        if key in MOVE:
+        #You can either fall or move. Not both
+        if self.should_fall():
+            self.fall()
+        elif key in MOVE:
             (dx,dy) = MOVE[key]
             self.move(dx,dy)
             #print level.has_won()
+
+            
         if key in DIG:
             #print "in dig "+key
             (digx,digy) =DIG[key]
             self.dig(digx,digy)
-        if self.should_fall():
-            self.fall()
+
     def at_exit (self):
         return (self._y == 0)

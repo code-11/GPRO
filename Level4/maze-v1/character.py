@@ -11,6 +11,7 @@ class Character (object):
         self._level = level
         self._score =0
         self._queue=Q
+        self._dead=False
 
     def same_loc (self,x,y):
         return (self._x == x and self._y == y)

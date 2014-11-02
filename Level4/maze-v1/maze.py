@@ -28,11 +28,14 @@ def main ():
     rect.setOutline('white')
     rect.draw(window)
 
-    level = Level()
-
-    screen = level.create_screen(window)
+    level = Level(window)
 
     Q=Event_Queue()
+    
+    level.pics_ref={}
+    level.board=level.create_second_level()
+
+    screen = level.create_screen(window)
     
     p = Player(17,18,window,level,Q)
 
@@ -42,6 +45,13 @@ def main ():
 
     level.characters.extend([p,baddie1,baddie2,baddie3])
 
+    #screen = level.create_screen(window)
+    level.handle_water(window,Q)
+
+    #adding the level to the queue refreshes moving characters
+    #every once and awhile. Its a workaround for a graphical glitch
+    #that since the water is drawn second you appear behind the water.
+    Q.enqueue(TIME_STEP*120,level)
     
     while not p.at_exit():
         Q.dequeue_if_ready()
