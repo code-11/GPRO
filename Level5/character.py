@@ -1,20 +1,20 @@
 from thing import *
+import pyglet
 #
 # Characters represent persons and animals and things that move
 # about possibly proactively
 #
 class Character (Thing):
-    def __init__ (self,name,desc):
-        Thing.__init__(self,name,desc)
-        log("Character.__init__ for "+str(self))
-        rect = Rectangle(Point(1,1),
-                         Point(TILE_SIZE-1,TILE_SIZE-1))
-        rect.setFill("red")
-        rect.setOutline("red")
-        self._sprite = rect
+    def __init__ (self,x,y,name,desc,paintLine,queue):
+        Thing.__init__(self,x,y,name,desc,paintLine,queue)
+##        self._sprite = rect
+        pic = pyglet.image.load('t_android_red.gif')
+        self._sprite= pyglet.sprite.Sprite(pic, x=x, y=y)
 
     # A character has a move() method that you should implement
     # to enable movement
+    def on_draw(self):
+        self._sprite.draw()
 
     def move (self,dx,dy):
         # WRITE ME!

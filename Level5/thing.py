@@ -18,12 +18,15 @@ from root import *
 # assign it a specific sprite (see the OlinStatue below).
 # 
 class Thing (Root):
-    def __init__ (self,name,desc):
+    def __init__ (self,x,y,name,desc,paintLine,queue):
         self._name = name
         self._description = desc
+        self._x=x
+        self._y=y
 ##        self._sprite = Text(Point(TILE_SIZE/2,TILE_SIZE/2),"?")
-        log("Thing.__init__ for "+str(self))
-
+##        log("Thing.__init__ for "+str(self))
+        paintLine.append(self)
+        queue.enqueue(10,self)
     def __str__ (self):
         return "<"+self.name()+">"
 
@@ -46,7 +49,7 @@ class Thing (Root):
     # creating a thing does not put it in play -- you have to 
     # call materialize, passing in the screen and the position
     # where you want it to appear
-    def materialize (self,screen,x,y):
+    def materialize (self,x,y):
 ##        screen.add(self,x,y)
 ##        self._screen = screen
         self._x = x
