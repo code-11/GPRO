@@ -1,5 +1,6 @@
 from thing import *
 import pyglet
+import random
 #
 # Characters represent persons and animals and things that move
 # about possibly proactively
@@ -16,7 +17,7 @@ class Character (Thing):
     def on_draw(self):
         self._sprite.draw()
 
-    def move (self,dx,dy):
+    def event (self,Q):
         # WRITE ME!
         pass   
 
