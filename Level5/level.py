@@ -22,73 +22,84 @@
 # You'll probably want to replace this with something that 
 # implements a specific map -- perhaps of Olin?
 #
-import pyglet
-def draw_rectangle(x1,y1,x2,y2):
-    pyglet.graphics.draw_indexed(4, pyglet.gl.GL_TRIANGLES,
-    [0, 1, 2, 0, 2, 3],
-    ('v2i', (x1, y1,
-             x2, y1,
-             x2, y2,
-             x1, y2))
-    )
-    
-def draw_rectangle_alt(x,y,width,height,color=(0,0,0)):
-    pyglet.graphics.glColor3f(color[0],color[1],color[2])
-    pyglet.graphics.draw_indexed(4, pyglet.gl.GL_TRIANGLES,
-    [0, 1, 2, 0, 2, 3],
-    ('v2i', (x, y,
-             x+width, y,
-             x+width, y+height,
-             x, y+height))
-    )
 
+
+
+from block import *
+from waypoint import *
+from navigator import *
 import random
 class Level (object):
+    def scale(self,factor):
+        for block in self._map:
+            block.scale(factor)
+        self._navigator.scale(factor)
+    def level_one(self,paintLine):
+        _map=[]
+        _map.append(Block(100,0,750,30,""))      #A
+        _map.append(Block(700,0,600,30,""))      #B
+        _map.append(Block(450,0,30,200,""))      #C
+        _map.append(Block(950,0,30,170,""))      #D
+        _map.append(Block(1300,0,30,300,""))     #E 1200
+        _map.append(Block(1300,400,30,200,""))   #E2
+        _map.append(Block(1300,700,30,200,""))   #E3
+        _map.append(Block(1300,1000,30,200,""))  #E4
+        _map.append(Block(100,1200,1230,30,""))  #F
+        _map.append(Block(1200,400,100,30,""))   #0
+        _map.append(Block(950,400,100,30,""))    #N
+        _map.append(Block(950,300,30,300,""))    #M
+        _map.append(Block(950,700,30,300,""))    #P
+        _map.append(Block(950,1100,30,120,""))   #R
+        _map.append(Block(870,900,100,30,""))    #Q
+        _map.append(Block(-150,900,770,30,""))   #H
+        _map.append(Block(450,1100,30,120,""))   #S
+        _map.append(Block(1300,1000,200,30,""))  #U
+        _map.append(Block(1500,300,30,730,""))   #V
+        _map.append(Block(1300,300,200,30,""))   #W
+        _map.append(Block(450,700,30,300,""))    #T
+        _map.append(Block(450,300,30,300,""))    #L
+        _map.append(Block(-150,400,600,30,""))   #J
+        _map.append(Block(100,800,30,400,""))    #G
+        _map.append(Block(-150,400,30,500,""))   #I
+        _map.append(Block(100,0,30,700,""))      #K
+        self._map=_map
+
+        waypoints=[]
+        waypoints.append(Waypoint(500,500,paintLine))
+
+        self._navigator=Navigator(waypoints)
+        
+        
     def __init__ (self,paintLine):
         self._width=50
         self._height=50
         size = self._width * self._height
-        map = [0] * size
-        for i in range(100):
-            map[random.randrange(size)] = 1
-        for i in range(50):
-            map[random.randrange(size)] = 2
-        self._map = map
+        
+        
+        self.level_one(paintLine)
+        self.scale(.25)
 
         paintLine.append(self)
 
     def _pos (self,x,y):
         return x + (y*self._width);
-
+    
+##    def inv_pos(self,index):
+##        return (index%self._width,index/self._width)
     # return the tile at a given tile position in the level
     def tile (self,x,y):
         return self._map[self._pos(x,y)]
 
     # Does a point with graphics coordinates x and y collide with the level?
     def collide(self,graph_x,graph_y):
-        for x in xrange(self._width):
-            for y in xrange(self._height):
-                if self._map[self._pos(x,y)]==1:
-                    graph_x_blk=self.transX(x)
-                    graph_y_blk=self.transY(y)
-                    collision=self.withinBox(graph_x,graph_y,graph_x_blk,graph_y_blk)
-                    if collision:
-                        return collision
+        for block in self._map:
+            if self.withinBox(graph_x,graph_y,block):
+                return True
         return False
-    #Transform grid corrds to graphical coords.
-    def transX(self,x):
-        return x*10
-
-    def transY(self,y):
-        return y*10
     
-    def withinBox(self,x,y,x2,y2):
-        return (x>x2 and x<x2+20) and (y>y2 and y<y2+20)
+    def withinBox(self,x,y,block):
+        return (x>block._x and x<block._x+block._width) and (y>block._y and y<block._y+block._height)
 
     def on_draw(self):
-        for x in xrange(self._width):
-            for y in xrange(self._height):
-                if self.tile(x,y)==1:
-                    #print self.addX
-                    draw_rectangle_alt(x*10,y*10,20,20,(0,.5,.25))
-                    #print x
+        for block in self._map:
+                block.on_draw()

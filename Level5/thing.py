@@ -18,15 +18,14 @@ from root import *
 # assign it a specific sprite (see the OlinStatue below).
 # 
 class Thing (Root):
-    def __init__ (self,x,y,name,desc,paintLine,queue):
+    def __init__ (self,x,y,name,desc,paintLine):
         self._name = name
         self._description = desc
         self._x=x
         self._y=y
 ##        self._sprite = Text(Point(TILE_SIZE/2,TILE_SIZE/2),"?")
 ##        log("Thing.__init__ for "+str(self))
-        paintLine.append(self)
-        queue.enqueue(10,self)
+
     def __str__ (self):
         return "<"+self.name()+">"
 

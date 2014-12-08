@@ -29,9 +29,9 @@ class Player (Character):
 
     #returns True if one of the corners of the sprite interacts with the environment
     def check_all_corners(self,xoff=0,yoff=0):
-        lowl=self.lvl.collide(self._sprite.x+1+xoff,self._sprite.y-1+yoff)
+        lowl=self.lvl.collide(self._sprite.x+xoff,self._sprite.y-1+yoff)
         lowr=self.lvl.collide(self._sprite.x+19+xoff,self._sprite.y-1+yoff)
-        highl=self.lvl.collide(self._sprite.x+1+xoff,self._sprite.y+19+yoff)
+        highl=self.lvl.collide(self._sprite.x+xoff,self._sprite.y+19+yoff)
         highr=self.lvl.collide(self._sprite.x+19+xoff,self._sprite.y+19+yoff)
         return (lowl or lowr or highl or highr)
 

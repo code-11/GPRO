@@ -8,7 +8,7 @@ from pyglet.window import key
 class GameEngine(object):
 
     def __init__(self):
-        self.window=pyglet.window.Window(500,500)
+        self.window=pyglet.window.Window(700,700)
 
 ##        self.window.maximize()
 
@@ -30,8 +30,8 @@ class GameEngine(object):
         self.window.push_handlers(self.key_handler)
         self.window.push_handlers(self.on_draw)
 
-        #access and schedule ~30fps on built in clock
-        pyglet.clock.schedule_interval(self.update, 1/120.0)#1/120.0)
+        #access and schedule ~60fps on built in clock
+        pyglet.clock.schedule_interval(self.update, 1/60.0)#1/120.0)
 
     def update(self,dt):
         self.queue.dequeue_if_ready()

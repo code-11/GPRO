@@ -7,11 +7,12 @@ import random
 #
 class Character (Thing):
     def __init__ (self,x,y,name,desc,paintLine,queue):
-        Thing.__init__(self,x,y,name,desc,paintLine,queue)
+        Thing.__init__(self,x,y,name,desc,paintLine)
 ##        self._sprite = rect
         pic = pyglet.image.load('t_android_red.gif')
         self._sprite= pyglet.sprite.Sprite(pic, x=x, y=y)
-
+        paintLine.append(self)
+        queue.enqueue(10,self)
     # A character has a move() method that you should implement
     # to enable movement
     def on_draw(self):
