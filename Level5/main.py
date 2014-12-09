@@ -24,7 +24,7 @@ class GameEngine(object):
         self.player=Player(250,250,"Player",self.paintLine,self.queue,self.key_handler,self.lvl)
 ##        self.player.materialize(500,500)
         
-        Character(100,100,"Trusty","Chester",self.paintLine,self.queue)    
+##        Character(100,100,"Trusty","Chester",self.paintLine,self.queue)    
 
         #
         #satisfies pyglet's event based fetish

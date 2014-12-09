@@ -1,5 +1,9 @@
 from waypoint import *
 class Navigator(object):
+    @staticmethod
+    def dconn(a,b):
+        a.conn(b)
+        b.conn(a)
     def __init__(self,waypoints):
         self._points=waypoints
     def scale(self,factor):

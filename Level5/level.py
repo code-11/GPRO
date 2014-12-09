@@ -77,40 +77,140 @@ class Level (object):
         waypoints=[]
         a=Waypoint(300,250)
         b=Waypoint(550,250)
+        b1=Waypoint(730,250)
         c=Waypoint(900,250)
         d=Waypoint(1100,250)
         e=Waypoint(1100,350)
-        f=Waypoint(1300,350)
+        f=Waypoint(1260,370)
         g=Waypoint(1100,100)
+        g1=Waypoint(1260,100)
+        h=Waypoint(1400,370)
+        i=Waypoint(1400,650)
+        j=Waypoint(1400,950)
+        k=Waypoint(1260,650)
+        l=Waypoint(1100,450)
+        m=Waypoint(1260,950)
+        n=Waypoint(1260,1160)
+        o=Waypoint(1050,650)
+        p=Waypoint(1050,1060)
+        q=Waypoint(1100,1160)
+        r=Waypoint(1100,950)
+        s=Waypoint(900,650)
+        t=Waypoint(900,850)
+        u=Waypoint(550,650)
+        v=Waypoint(730,850)
+        w=Waypoint(730,650)
+        x=Waypoint(550,850)
+        y=Waypoint(730,960)
+        z=Waypoint(900,960)
+        aa=Waypoint(900,1060)
+        ab=Waypoint(900,1160)
+        ac=Waypoint(550,1160)
+        ad=Waypoint(550,1060)
+        ae=Waypoint(550,960)  
+        af=Waypoint(300,1060)
         
-        a.conn(b)
-
-        b.conn(a)
-        b.conn(b)
-        b.conn(c)
-
-        c.conn(b)
-        c.conn(d)
-
-        d.conn(c)
-        d.conn(e)
-        d.conn(f)
-        d.conn(g)
-
-        e.conn(d)
-        e.conn(f)
-
-        f.conn(e)
-        f.conn(d)
-
-        g.conn(d)
-
-        
+        ag=Waypoint(400,650)
+        ah=Waypoint(400,450)
+        ai=Waypoint(170,450)
+        aj=Waypoint(170,650)
+        ak=Waypoint(170,750)
+        al=Waypoint(0,750)
         
 
-        
+        #make code smaller
+        Nav=Navigator 
 
-        waypoints+=[a,b,c,d,e,f,g]
+        Nav.dconn(a,b)
+
+        Nav.dconn(b,b1)
+        Nav.dconn(b,u)
+
+        Nav.dconn(b1,c)
+        Nav.dconn(b1,w)
+
+        Nav.dconn(c,d)
+        Nav.dconn(c,s)
+        
+        Nav.dconn(d,e)
+        Nav.dconn(d,f)
+        Nav.dconn(d,g)
+
+        Nav.dconn(e,l)
+
+        Nav.dconn(f,e)
+        Nav.dconn(f,h)
+        Nav.dconn(f,g1)
+
+        Nav.dconn(g,g1)
+        
+        Nav.dconn(h,i)
+        
+        Nav.dconn(i,j)
+        Nav.dconn(i,k)
+
+        Nav.dconn(j,m)
+
+        Nav.dconn(k,l)
+        Nav.dconn(k,m)
+        Nav.dconn(k,o)
+
+        Nav.dconn(l,o)
+        Nav.dconn(l,r)
+
+        Nav.dconn(m,n)
+        Nav.dconn(m,r)
+
+        Nav.dconn(n,q)
+
+        Nav.dconn(o,p)
+        Nav.dconn(o,r)
+        Nav.dconn(o,s)
+
+        Nav.dconn(p,r)
+        Nav.dconn(p,q)
+        Nav.dconn(p,aa)
+        
+        Nav.dconn(q,r)
+
+        Nav.dconn(s,t)
+
+        Nav.dconn(t,v)
+
+        Nav.dconn(u,x)
+        Nav.dconn(u,ag)
+
+        Nav.dconn(v,x)
+        Nav.dconn(v,y)
+
+        Nav.dconn(y,z)
+        Nav.dconn(y,ae)
+
+        Nav.dconn(z,aa)
+
+        Nav.dconn(aa,ab)
+
+        Nav.dconn(ab,ac)
+
+        Nav.dconn(ac,ad)
+
+        Nav.dconn(ad,ae)
+        Nav.dconn(ad,af)
+
+        Nav.dconn(ag,ah)
+        Nav.dconn(ag,aj)
+        Nav.dconn(ag,ak)
+
+        Nav.dconn(ah,ai)
+
+        Nav.dconn(ai,aj)
+
+        Nav.dconn(aj,ak)
+
+        Nav.dconn(ak,al)
+
+        waypoints+=[a,b,b1,c,d,e,f,g,g1,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x]
+        waypoints+=[y,z,aa,ab,ac,ad,ae,af,ag,ah,ai,aj,ak,al]
 
         self._navigator=Navigator(waypoints)
         
@@ -122,7 +222,7 @@ class Level (object):
         
         
         self.level_one(paintLine)
-        self.scale(.25)
+##        self.scale(.25)
 
         paintLine.append(self)
 
