@@ -1,8 +1,12 @@
 from block import *
 from drawing import *
 class Waypoint(Block):
-    def __init__(self,x,y,paintLine):
-        Block.__init__(self,x,y,10,10,"NA")
-        paintLine.append(self)
+    def __init__(self,x,y):
+        Block.__init__(self,x,y,10,10,"")
+        self._points=[]
     def on_draw(self):
         draw_rectangle_alt(self._x,self._y,self._width,self._height,(1,1,1))
+        for p in self._points:
+            draw_line(self._x,self._y,p.getX(),p.getY(),(1,0,0))
+    def conn(self,point):
+        self._points.append(point)

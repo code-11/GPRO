@@ -26,6 +26,7 @@ class GameEngine(object):
         
         Character(100,100,"Trusty","Chester",self.paintLine,self.queue)    
 
+        #
         #satisfies pyglet's event based fetish
         self.window.push_handlers(self.key_handler)
         self.window.push_handlers(self.on_draw)

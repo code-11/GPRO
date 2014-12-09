@@ -5,3 +5,6 @@ class Navigator(object):
     def scale(self,factor):
         for point in self._points:
             point.scale(factor)
+    def on_draw(self):
+        for point in self._points:
+            point.on_draw()

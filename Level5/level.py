@@ -35,37 +35,82 @@ class Level (object):
             block.scale(factor)
         self._navigator.scale(factor)
     def level_one(self,paintLine):
+        col=(.1,.5,.25)
+        
         _map=[]
-        _map.append(Block(100,0,750,30,""))      #A
-        _map.append(Block(700,0,600,30,""))      #B
-        _map.append(Block(450,0,30,200,""))      #C
-        _map.append(Block(950,0,30,170,""))      #D
-        _map.append(Block(1300,0,30,300,""))     #E 1200
-        _map.append(Block(1300,400,30,200,""))   #E2
-        _map.append(Block(1300,700,30,200,""))   #E3
-        _map.append(Block(1300,1000,30,200,""))  #E4
-        _map.append(Block(100,1200,1230,30,""))  #F
-        _map.append(Block(1200,400,100,30,""))   #0
-        _map.append(Block(950,400,100,30,""))    #N
-        _map.append(Block(950,300,30,300,""))    #M
-        _map.append(Block(950,700,30,300,""))    #P
-        _map.append(Block(950,1100,30,120,""))   #R
-        _map.append(Block(870,900,100,30,""))    #Q
-        _map.append(Block(-150,900,770,30,""))   #H
-        _map.append(Block(450,1100,30,120,""))   #S
-        _map.append(Block(1300,1000,200,30,""))  #U
-        _map.append(Block(1500,300,30,730,""))   #V
-        _map.append(Block(1300,300,200,30,""))   #W
-        _map.append(Block(450,700,30,300,""))    #T
-        _map.append(Block(450,300,30,300,""))    #L
-        _map.append(Block(-150,400,600,30,""))   #J
-        _map.append(Block(100,800,30,400,""))    #G
-        _map.append(Block(-150,400,30,500,""))   #I
-        _map.append(Block(100,0,30,700,""))      #K
+        _map.append(Block(100,0,750,30,col))      #A
+        _map.append(Block(700,0,600,30,col))      #B
+        _map.append(Block(450,0,30,200,col))      #C
+        _map.append(Block(950,0,30,170,col))      #D
+        _map.append(Block(1300,0,30,300,col))     #E 1200
+        _map.append(Block(1300,400,30,200,col))   #E2
+        _map.append(Block(1300,700,30,200,col))   #E3
+        _map.append(Block(1300,1000,30,200,col))  #E4
+        _map.append(Block(100,1200,1230,30,col))  #F
+        _map.append(Block(1200,400,100,30,col))   #0
+        _map.append(Block(950,400,100,30,col))    #N
+        _map.append(Block(950,300,30,300,col))    #M
+        _map.append(Block(950,700,30,300,col))    #P
+        _map.append(Block(950,1100,30,120,col))   #R
+        _map.append(Block(870,900,100,30,col))    #Q
+        _map.append(Block(-150,900,770,30,col))   #H
+        _map.append(Block(450,1100,30,120,col))   #S
+        _map.append(Block(1300,1000,200,30,col))  #U
+        _map.append(Block(1500,300,30,730,col))   #V
+        _map.append(Block(1300,300,200,30,col))   #W
+        _map.append(Block(450,700,30,300,col))    #T
+        _map.append(Block(450,300,30,300,col))    #L
+        _map.append(Block(-150,400,600,30,col))   #J
+        _map.append(Block(100,800,30,400,col))    #G
+        _map.append(Block(-150,400,30,500,col))   #I
+        _map.append(Block(100,0,30,700,col))      #K
+
+        brown=(.5,.3,.1)
+        _map.append(Block(670,400,170,350,brown)) #stairs
+        _map.append(Block(590,1000,250,110,brown)) #dining table
+        _map.append(Block(1200,1100,30,30,brown)) #hall table
+        _map.append(Block(1200,800,30,30,brown)) #hall table
+        _map.append(Block(1200,150,30,30,brown)) #sitting room table
+        _map.append(Block(200,500,150,60,brown)) #kitchenette table
         self._map=_map
 
         waypoints=[]
-        waypoints.append(Waypoint(500,500,paintLine))
+        a=Waypoint(300,250)
+        b=Waypoint(550,250)
+        c=Waypoint(900,250)
+        d=Waypoint(1100,250)
+        e=Waypoint(1100,350)
+        f=Waypoint(1300,350)
+        g=Waypoint(1100,100)
+        
+        a.conn(b)
+
+        b.conn(a)
+        b.conn(b)
+        b.conn(c)
+
+        c.conn(b)
+        c.conn(d)
+
+        d.conn(c)
+        d.conn(e)
+        d.conn(f)
+        d.conn(g)
+
+        e.conn(d)
+        e.conn(f)
+
+        f.conn(e)
+        f.conn(d)
+
+        g.conn(d)
+
+        
+        
+
+        
+
+        waypoints+=[a,b,c,d,e,f,g]
 
         self._navigator=Navigator(waypoints)
         
@@ -103,3 +148,4 @@ class Level (object):
     def on_draw(self):
         for block in self._map:
                 block.on_draw()
+        self._navigator.on_draw()

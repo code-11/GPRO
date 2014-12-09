@@ -17,3 +17,8 @@ def draw_rectangle_alt(x,y,width,height,color=(0,0,0)):
              x+width, y+height,
              x, y+height))
     )
+def draw_line(x1,y1,x2,y2,color=(0,0,0)):
+    pyglet.graphics.glColor3f(color[0],color[1],color[2])
+    pyglet.graphics.draw(2,pyglet.gl.GL_LINES,
+    ('v2i', (x1, y1, x2, y2))
+    )
