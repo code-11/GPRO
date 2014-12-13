@@ -1,17 +1,17 @@
 from character import *
 
 class NPC(Character):
-    def __init__(self,x,y,name,desc,paintLine,queue):
+    def __init__(self,x,y,name,desc,paintLine,queue,level):
         Character.__init__(self,x,y,name,desc,paintLine,queue)
         self._goal_pos=(self._sprite.x,self._sprite.y)
-
+        self._level=level
+        
     #sets goal position of NPC
     def set_goal_pos(self,x,y):
         self._goal_pos=(400,400)
 
     #moves towards a position, assuming nothing in the way
     def towards(self):
-        print self._goal_pos
         mov=2
         goal_size=3
         gx,gy=self._goal_pos

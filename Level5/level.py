@@ -1,33 +1,7 @@
-#############################################################
-# 
-# The description of the world and the screen which displays
-# the world
-#
-# A level contains the background stuff that you can't really
-# interact with. The tiles are decorative, and do not come
-# with a corresponding object in the world. (Though you can
-# change that if you want.)
-#
-# Right now, a level is described using the following encoding
-#
-# 0 empty   (light green rectangle)
-# 1 grass   (green rectangle)
-# 2 tree    (sienna rectangle)
-#
-# you'll probably want to make nicer sprites at some point.
-
-
-#
-# This implements a random level right now. 
-# You'll probably want to replace this with something that 
-# implements a specific map -- perhaps of Olin?
-#
-
-
-
 from block import *
 from waypoint import *
 from navigator import *
+from level_utils import *
 import random
 class Level (object):
     def scale(self,factor):
@@ -225,6 +199,8 @@ class Level (object):
 
         paintLine.append(self)
 
+        print self.raycast(0,0,2000,2000)
+
     def _pos (self,x,y):
         return x + (y*self._width);
     
@@ -233,16 +209,26 @@ class Level (object):
     # return the tile at a given tile position in the level
     def tile (self,x,y):
         return self._map[self._pos(x,y)]
-
+    
     # Does a point with graphics coordinates x and y collide with the level?
     def collide(self,graph_x,graph_y):
         for block in self._map:
-            if self.withinBox(graph_x,graph_y,block):
+            if withinBox(graph_x,graph_y,block):
                 return True
         return False
-    
-    def withinBox(self,x,y,block):
-        return (x>block._x and x<block._x+block._width) and (y>block._y and y<block._y+block._height)
+
+    #preforms a fake raycast against stationary level objects
+    #from point x1,y1 to point x2,y2
+    def raycast(self,x1,y1,x2,y2):
+        DIS=15
+        mult=find_mult(x1,y1,x2,y2,DIS)
+        for i in range(mult):
+            point=scale_vector(x1,y1,x2,y2,DIS*(i+1))
+            if self.collide(point[0],point[1]):
+                return (point[0],point[1])
+        if self.collide(x2,y2):
+                return (x2,y2)
+        return None
 
     def on_draw(self):
         for block in self._map:
