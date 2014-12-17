@@ -1,5 +1,5 @@
 from character import *
-from level_utils import man_dis,dis
+from level_utils import man_dis,dis,scale_vector
 
 class NPC(Character):
     def __init__(self,x,y,name,desc,paintLine,queue,level):
@@ -26,8 +26,8 @@ class NPC(Character):
             self._goal_Q=self._level._navigator.pretty_path(your_point,goal_point)
             self._far_goal=(x,y)
 
-    #moves towards a position, assuming nothing in the way
-    def towards(self):
+    #moves towards a position, assuming nothing in the way using stupid methods
+    def towards_old(self):
         mov=2
         gx,gy=self._goal_pos
         x=self._sprite.x
@@ -41,6 +41,19 @@ class NPC(Character):
             self._sprite.y-=mov
         elif y<gy:
             self._sprite.y+=mov
+
+    #moves towards a position, assuming nothing in the way using lovely vectors
+    def towards(self):
+        mov=3
+        gx,gy=self._goal_pos
+        x=self._sprite.x
+        y=self._sprite.y
+        new_pos_vect=scale_vector(x,y,gx,gy,mov)
+        deltax=int(new_pos_vect[0]-x)
+        deltay=int(new_pos_vect[1]-y)
+
+        self._sprite.x+=deltax
+        self._sprite.y+=deltay
             
     def go(self):
         #if have converged on goal pos
