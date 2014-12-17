@@ -199,7 +199,7 @@ class Level (object):
 
         paintLine.append(self)
 
-        print self.raycast(0,0,2000,2000)
+        #print self.raycast(0,0,2000,2000)
 
     def _pos (self,x,y):
         return x + (y*self._width);
@@ -229,6 +229,23 @@ class Level (object):
         if self.collide(x2,y2):
                 return (x2,y2)
         return None
+
+    #reutrns the closest waypoint to a point
+    #making sure a straight line exists between the two
+    def closest_waypoint(self,x,y,precision=True):
+        Q=self._navigator.waypoint_distances(x,y,precision)
+
+        while not(Q.empty()):
+            dis,obj=Q.get()
+            test=self.raycast(x,y,obj._x,obj._y)
+            # if straight line
+            if test==None:
+                return obj
+            
+        #This will make things expload
+        return None
+                
+    
 
     def on_draw(self):
         for block in self._map:

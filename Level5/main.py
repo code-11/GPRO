@@ -24,9 +24,10 @@ class GameEngine(object):
         self.player=Player(250,250,"Player",self.paintLine,self.queue,self.key_handler,self.lvl)
 ##        self.player.materialize(500,500)
         
-        test=NPC(200,200,"","",self.paintLine,self.queue)
-        test.set_goal_pos(400,400)
-        #
+        test=NPC(170,370,"","",self.paintLine,self.queue,self.lvl)
+        #test.set_far_goal(1260,1160)
+        test.set_far_goal(0,450)
+        
         #satisfies pyglet's event based fetish
         self.window.push_handlers(self.key_handler)
         self.window.push_handlers(self.on_draw)

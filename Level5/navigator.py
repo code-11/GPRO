@@ -1,5 +1,7 @@
 from waypoint import *
 from nav_utils import *
+from level_utils import dis, man_dis
+import Queue
 
 
 #class for handling navigation algorithms for the characters.
@@ -29,7 +31,28 @@ class Navigator(object):
             
     def find_path(self,way1,way2):
         pway1=Pathpoint(way1,[])
-        return self.find_path_help(pway1,way2,[],[])    
+        return self.find_path_help(pway1,way2,[],[])
+    
+    #Finds the distances from all waypoints to a given screen pointt        
+    def waypoint_distances(self,x,y,precision=True):
+        #Man, dis q is so cool
+        dis_q=Queue.PriorityQueue()
+        for point in self._points:
+            if precision==True:
+                the_distance=dis(x,y,point.getX(),point.getY())
+            else:
+                the_distance=man_dis(x,y,point.getX(),point.getY())
+            dis_q.put((the_distance,point))
+        return dis_q
+
+
+    #returns the closes waypoint to a point without checking for a straight line
+    #should probably use closest_waypoint in level instead
+    def closest_waypoint_abs(self,x,y,precision=True):
+        Q=self.waypoint_distances(x,y,precision)
+        dis,obj=Q.get()
+        return obj
+    
 
     #to_search is a list of pathpoints
     #searched is a list of pathpoints
