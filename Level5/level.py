@@ -73,7 +73,7 @@ class Level (object):
         t=Waypoint(900,850,"t")
         u=Waypoint(550,650,"u")
         v=Waypoint(730,850,"v")
-        w=Waypoint(730,650,"w")
+##        w=Waypoint(730,650,"w")
         x=Waypoint(550,850,"x")
         y=Waypoint(730,960,"y")
         z=Waypoint(900,960,"z")
@@ -101,7 +101,7 @@ class Level (object):
         Nav.dconn(b,u)
 
         Nav.dconn(b1,c)
-        Nav.dconn(b1,w)
+##        Nav.dconn(b1,w)
 
         Nav.dconn(c,d)
         Nav.dconn(c,s)
@@ -183,7 +183,8 @@ class Level (object):
 
         Nav.dconn(ak,al)
 
-        waypoints+=[a,b,b1,c,d,e,f,g,g1,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x]
+        waypoints+=[a,b,b1,c,d,e,f,g,g1,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,x]
+##        waypoints+=[w]
         waypoints+=[y,z,aa,ab,ac,ad,ae,af,ag,ah,ai,aj,ak,al]
 
         self._navigator=Navigator(waypoints)        
@@ -245,7 +246,6 @@ class Level (object):
         #This will make things expload
         return None
                 
-    
 
     def on_draw(self):
         for block in self._map:

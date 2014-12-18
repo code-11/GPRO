@@ -1,9 +1,10 @@
 from character import *
 from level_utils import man_dis,dis,scale_vector
-
+from global_vars import CHAR_ACTION_RATE
+import random
 class NPC(Character):
-    def __init__(self,x,y,name,desc,paintLine,queue,level):
-        Character.__init__(self,x,y,name,desc,paintLine,queue)
+    def __init__(self,x,y,name,desc,image_name,paintLine,queue,level):
+        Character.__init__(self,x,y,name,desc,image_name,paintLine,queue)
         self._goal_pos=(self._sprite.x,self._sprite.y)
         self._far_goal=None
         self._goal_Q=[]
@@ -65,11 +66,12 @@ class NPC(Character):
                     # if straight line to far goal
                     if line==None:
                         self._goal_pos=self._far_goal
+                        self._far_goal=None
                     else:
                         print "Character"+str(self._name)+" waypathing error"
                 else:
+                    pass
                     #character has no goal in life. What a slacker!
-                    pass #print "Character" +str(self._name)+" has reached goal"
             else:
                 next_way=self._goal_Q.pop(0)
                 self.set_goal_pos(next_way._x,next_way._y)
@@ -78,9 +80,7 @@ class NPC(Character):
             self.towards()
 
     def event(self,Q):
-##        self.far_towards()
-##        self.towards()
         self.go()
-        Q.enqueue(10,self)
+        Q.enqueue(CHAR_ACTION_RATE,self)
         
         

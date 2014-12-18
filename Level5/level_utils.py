@@ -11,10 +11,15 @@ def scale_vector(x1,y1,x2,y2,factor):
     
     # find length
     length=math.sqrt((x2-x1)**2+(y2-y1)**2)
-    
+
+    #Should probably find out why its returning length of 0...
+    #will get rounded down to nothing when int'ed later so might not matter.
+    if length==0:
+        length+=.0001
+
     # normalize
     norm=(trans[0]/length,trans[1]/length)
-
+        
     #scale by amount
     scale=(norm[0]*factor,norm[1]*factor)
     

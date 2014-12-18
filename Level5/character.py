@@ -6,10 +6,10 @@ import random
 # about possibly proactively
 #
 class Character (Thing):
-    def __init__ (self,x,y,name,desc,paintLine,queue):
+    def __init__ (self,x,y,name,desc,image_name,paintLine,queue):
         Thing.__init__(self,x,y,name,desc,paintLine)
 ##        self._sprite = rect
-        pic = pyglet.image.load('t_android_red.gif')
+        pic = pyglet.image.load(image_name)
         self._sprite= pyglet.sprite.Sprite(pic, x=x, y=y)
         paintLine.append(self)
         queue.enqueue(10,self)

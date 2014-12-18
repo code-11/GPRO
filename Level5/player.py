@@ -8,11 +8,12 @@ from pyglet.gl import glTranslatef
 #
 class Player (Character):
     def __init__ (self,x,y,name,paintLine,queue,key_handler,lvl):
-        Character.__init__(self,x,y,name,"Yours truly",paintLine,queue)
+        Character.__init__(self,x,y,name,"Yours truly",'t_android_red.gif',paintLine,queue)
 ##        log("Player.__init__ for "+str(self))
 ##        pic = 't_android_red.gif'
-        pic = pyglet.image.load('t_android_red.gif')
-        self._sprite= pyglet.sprite.Sprite(pic, x=x, y=y)
+##        pic = pyglet.image.load('t_android_red.gif')
+##        pic = pyglet.image.load('castro.gif')
+##        self._sprite= pyglet.sprite.Sprite(pic, x=x, y=y)
         self.key_handler=key_handler
         queue.enqueue(10,self)
         self.lvl=lvl
@@ -37,6 +38,9 @@ class Player (Character):
 
     def event(self,Q):
 ##        print self.check_all_corners(0,3)
+        if self.key_handler[key.ENTER]:
+            print "x,y :"+str(self._sprite.x)+","+str(self._sprite.y)
+        
         mov=3
         if self.key_handler[key.UP] and not(self.check_all_corners(0,mov)):
             glTranslatef(0,-mov,0)

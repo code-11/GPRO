@@ -2,6 +2,7 @@ from waypoint import *
 from nav_utils import *
 from level_utils import dis, man_dis
 import Queue
+import random
 
 
 #class for handling navigation algorithms for the characters.
@@ -52,6 +53,10 @@ class Navigator(object):
         Q=self.waypoint_distances(x,y,precision)
         dis,obj=Q.get()
         return obj
+
+    #returns a random waypoint
+    def random_waypoint(self):
+        return random.choice(self._points)
     
 
     #to_search is a list of pathpoints
