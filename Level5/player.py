@@ -9,7 +9,7 @@ from pyglet.gl import glTranslatef
 #
 class Player (Character):
     def __init__ (self,x,y,name,paintLine,queue,key_handler,lvl):
-        Character.__init__(self,x,y,name,"Yours truly",'t_android_red.gif',paintLine,queue)
+        Character.__init__(self,x,y,name,"Yours truly",'blue.gif',paintLine,queue)
 ##        log("Player.__init__ for "+str(self))
 ##        pic = 't_android_red.gif'
 ##        pic = pyglet.image.load('t_android_red.gif')
