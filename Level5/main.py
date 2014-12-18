@@ -34,7 +34,7 @@ class GameEngine(object):
 
         Rand_NPC(1000,370,"","","castro.gif",self.paintLine,self.queue,self.lvl)
         Rand_NPC(706,1000,"","","kennedy.gif",self.paintLine,self.queue,self.lvl)
-##        Target_NPC(-11,750,"","","khrushchev.gif",self.paintLine,self.queue,self.lvl,self.player)
+        Target_NPC(-11,750,"","","khrushchev.gif",self.paintLine,self.queue,self.lvl,self.player)
         
 ##        Rand_NPC(170,1000,"","",self.paintLine,self.queue,self.lvl)
 ##        Rand_NPC(800,500,"","",self.paintLine,self.queue,self.lvl)
