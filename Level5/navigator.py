@@ -13,6 +13,8 @@ import random
 #Mesh has to be made by hand currently, no auto gen
 #No Caching yet.
 class Navigator(object):
+    
+    #Python has decorators! Who knew!
     @staticmethod
     def dconn(a,b):
         a.conn(b)

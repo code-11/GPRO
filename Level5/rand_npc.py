@@ -1,4 +1,5 @@
 from npc import *
+from global_vars import CHAR_ACTION_RATE
 class Rand_NPC(NPC):
     def __init__(self,x,y,name,desc,image_name,paintLine,queue,level):
         NPC.__init__(self,x,y,name,desc,image_name,paintLine,queue,level)
@@ -11,4 +12,4 @@ class Rand_NPC(NPC):
     def event(self,Q):
         self.wander_ai()
         self.go()
-        Q.enqueue(10,self)
+        Q.enqueue(CHAR_ACTION_RATE,self)

@@ -1,4 +1,5 @@
 from thing import *
+from global_vars import CHAR_ACTION_RATE
 import pyglet
 import random
 #
@@ -12,7 +13,7 @@ class Character (Thing):
         pic = pyglet.image.load(image_name)
         self._sprite= pyglet.sprite.Sprite(pic, x=x, y=y)
         paintLine.append(self)
-        queue.enqueue(10,self)
+        queue.enqueue(CHAR_ACTION_RATE,self)
     # A character has a move() method that you should implement
     # to enable movement
     def on_draw(self):

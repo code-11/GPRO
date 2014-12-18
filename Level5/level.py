@@ -2,6 +2,7 @@ from block import *
 from waypoint import *
 from navigator import *
 from level_utils import *
+from global_vars import RAYCAST_PRECISION,BROWN,GREEN,DEBUG
 import random
 class Level (object):
     def scale(self,factor):
@@ -9,7 +10,7 @@ class Level (object):
             block.scale(factor)
         self._navigator.scale(factor)
     def level_one(self,paintLine):
-        col=(.1,.5,.25)
+        col=GREEN
         
         _map=[]
         _map.append(Block(100,0,750,30,col))      #A
@@ -39,7 +40,7 @@ class Level (object):
         _map.append(Block(-150,400,30,500,col))   #I
         _map.append(Block(100,0,30,700,col))      #K
 
-        brown=(.5,.3,.1)
+        brown=BROWN
         _map.append(Block(670,400,170,350,brown)) #stairs
         _map.append(Block(590,1000,250,110,brown)) #dining table
         _map.append(Block(1200,1100,30,30,brown)) #hall table
@@ -189,19 +190,13 @@ class Level (object):
 
         self._navigator=Navigator(waypoints)        
         
-    def __init__ (self,paintLine):
-        self._width=50
-        self._height=50
-        size = self._width * self._height
-        
-        
+    def __init__ (self,paintLine):   
         self.level_one(paintLine)
+        #can scale the level for layout purposes but will mess up waypathing 
 ##        self.scale(.25)
 
         paintLine.append(self)
-
-        #print self.raycast(0,0,2000,2000)
-
+        
     def _pos (self,x,y):
         return x + (y*self._width);
     
@@ -221,7 +216,7 @@ class Level (object):
     #preforms a fake raycast against stationary level objects
     #from point x1,y1 to point x2,y2
     def raycast(self,x1,y1,x2,y2):
-        DIS=15
+        DIS=RAYCAST_PRECISION
         mult=find_mult(x1,y1,x2,y2,DIS)
         for i in range(mult):
             point=scale_vector(x1,y1,x2,y2,DIS*(i+1))
@@ -250,4 +245,5 @@ class Level (object):
     def on_draw(self):
         for block in self._map:
                 block.on_draw()
-        self._navigator.on_draw()
+        if DEBUG:
+            self._navigator.on_draw()

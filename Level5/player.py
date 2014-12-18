@@ -1,5 +1,6 @@
 import pyglet
 from character import *
+from global_vars import SPRITE_SIZE,PLAYER_ACTION_RATE
 from pyglet.window import key
 from pyglet.gl import glTranslatef
 
@@ -15,7 +16,7 @@ class Player (Character):
 ##        pic = pyglet.image.load('castro.gif')
 ##        self._sprite= pyglet.sprite.Sprite(pic, x=x, y=y)
         self.key_handler=key_handler
-        queue.enqueue(10,self)
+        queue.enqueue(PLAYER_ACTION_RATE,self)
         self.lvl=lvl
 ##        self._sprite = Image(Point(TILE_SIZE/2,TILE_SIZE/2),pic)
         
@@ -29,11 +30,12 @@ class Player (Character):
         pass
 
     #returns True if one of the corners of the sprite interacts with the environment
+    #There is a 1px buffer around the sprite enforced by all the crazy -1 and +1
     def check_all_corners(self,xoff=0,yoff=0):
         lowl=self.lvl.collide(self._sprite.x+xoff,self._sprite.y-1+yoff)
-        lowr=self.lvl.collide(self._sprite.x+19+xoff,self._sprite.y-1+yoff)
-        highl=self.lvl.collide(self._sprite.x+xoff,self._sprite.y+19+yoff)
-        highr=self.lvl.collide(self._sprite.x+19+xoff,self._sprite.y+19+yoff)
+        lowr=self.lvl.collide(self._sprite.x+SPRITE_SIZE-1+xoff,self._sprite.y-1+yoff)
+        highl=self.lvl.collide(self._sprite.x+xoff,self._sprite.y+SPRITE_SIZE-1+yoff)
+        highr=self.lvl.collide(self._sprite.x+SPRITE_SIZE-1+xoff,self._sprite.y+SPRITE_SIZE-1+yoff)
         return (lowl or lowr or highl or highr)
 
     def event(self,Q):
@@ -60,7 +62,7 @@ class Player (Character):
 
 ##            self.lvl.addX+=mov
 
-        Q.enqueue(10,self)
+        Q.enqueue(PLAYER_ACTION_RATE,self)
     # The move() method of the Player is called when you 
     # press movement keys. 
     # It is different enough from movement by the other
